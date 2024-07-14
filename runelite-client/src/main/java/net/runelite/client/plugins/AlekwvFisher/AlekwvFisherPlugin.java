@@ -441,64 +441,39 @@ public class AlekwvFisherPlugin extends Plugin {
 
         int[] antibanMode = Arrays.stream(mode.split(",")).mapToInt(Integer::parseInt).toArray();
         int antibanChance = getRandomNumber(0, 100);
-        List<Runnable> antibanActions = new ArrayList<>();
 
         //1
-        antibanActions.add(() -> {
-            if (Arrays.stream(antibanMode).anyMatch(n -> n == 1) && config.antibanvalue_mousemovement() < antibanChance) {
-                Log("antibanvalue_mousemovement");
-                for (int i = 1; i < 3; i++) {
-                    if (!isMouseOutsideScreen()) {
-                        MouseTask = MouseMove(new Rectangle(1, 1, 764, 502), "false", 0, getRandomNumber(50, 500), false);
-                    }
+        if (Arrays.stream(antibanMode).anyMatch(n -> n == 1) && config.antibanvalue_mousemovement() < antibanChance) {
+            Log("antibanvalue_mousemovement");
+            for (int i = 1; i < 3; i++) {
+                if (!isMouseOutsideScreen()) {
+                    MouseTask = MouseMove(new Rectangle(1, 1, 764, 502), "false", 0, getRandomNumber(0, 400), false);
                 }
             }
-        });
+        }
 
         //2
-        antibanActions.add(() -> {
-            if (isMouseOutsideScreen()) {
-                return;
-            }
-            if (Arrays.stream(antibanMode).anyMatch(n -> n == 2) && config.antibanvalue_cameramovement() > antibanChance) {
-                Log("antibanvalue_cameramovement");
-            }
-        });
+        if (Arrays.stream(antibanMode).anyMatch(n -> n == 2) && config.antibanvalue_cameramovement() > antibanChance) {
+
+        }
 
         //3
-        antibanActions.add(() -> {
-
-            if (isMouseOutsideScreen()) {
-                return;
+        if (Arrays.stream(antibanMode).anyMatch(n -> n == 3) && config.antibanvalue_clickmouse() > antibanChance) {
+            Log("antibanvalue_clickmouse");
+            for (int i = 0; i < getRandomNumber(1, 2); i++) {
+                MouseTask = MouseMove(new Rectangle(1, 1, 764, 502), getRandomNumber(1, 2) == 1 ? "middle" : "right", 0, getRandomNumber(0, 1000), false);
             }
-
-            if (Arrays.stream(antibanMode).anyMatch(n -> n == 3) && config.antibanvalue_clickmouse() > antibanChance) {
-                Log("antibanvalue_clickmouse");
-                for (int i = 0; i < getRandomNumber(1, 2); i++) {
-                    MouseTask = MouseMove(new Rectangle(1, 1, 764, 502), getRandomNumber(1, 2) == 1 ? "middle" : "right", 0, getRandomNumber(50, 500), false);
-                }
-            }
-        });
+        }
 
         //4
-        antibanActions.add(() -> {
-            if (Arrays.stream(antibanMode).anyMatch(n -> n == 4) && config.antiban_mouseoutsidescreen() > antibanChance) {
-                try {
-                    Log("antiban_mouseoutsidescreen");
-                    Thread.sleep(getRandomNumber(0, 2000));
-                    MoveMouseOutsideScreen();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+        if (Arrays.stream(antibanMode).anyMatch(n -> n == 4) && config.antiban_mouseoutsidescreen() > antibanChance) {
+            try {
+                Log("antiban_mouseoutsidescreen");
+                Thread.sleep(getRandomNumber(0, 2000));
+                MoveMouseOutsideScreen();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-        });
-
-        // Shuffle the actions
-        Collections.shuffle(antibanActions);
-
-        // Execute each action
-        for (Runnable action : antibanActions) {
-            action.run();
         }
     }
 
