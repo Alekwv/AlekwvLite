@@ -69,7 +69,7 @@ public class AlekwvFisherOverlay extends Overlay
 		graphics.setColor(new Color(36, 36, 51));  // RGB for dark blue
 		int boxWidth = 100;
 		int boxHeight = 75;
-		int x = 5;  // X position of the box
+		int x = 7;  // X position of the box
 		int y = 260;  // Y position of the box
 		graphics.fillRect(x, y, boxWidth, boxHeight);
 
