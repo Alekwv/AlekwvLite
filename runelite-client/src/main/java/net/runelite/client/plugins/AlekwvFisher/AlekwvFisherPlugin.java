@@ -256,7 +256,7 @@ public class AlekwvFisherPlugin extends Plugin {
         } else if (config.location() == AlekwvFisherConfig.locations.LUMBRIDGE_SWAMP) {
             equipmentIDs = new int[]{303};
             droppableIDs = new int []{317, 321};
-            npcId = 1520;
+            npcId = 1530;
         } else if (config.location() == AlekwvFisherConfig.locations.BARBARIAN_VILLAGE) {
             equipmentIDs = new int[]{309, 314};
             droppableIDs = new int []{331, 335};
@@ -443,7 +443,6 @@ public class AlekwvFisherPlugin extends Plugin {
         int antibanChance = getRandomNumber(0, 100);
         List<Runnable> antibanActions = new ArrayList<>();
 
-
         //1
         antibanActions.add(() -> {
             if (Arrays.stream(antibanMode).anyMatch(n -> n == 1) && config.antibanvalue_mousemovement() < antibanChance) {
@@ -455,7 +454,6 @@ public class AlekwvFisherPlugin extends Plugin {
                 }
             }
         });
-
 
         //2
         antibanActions.add(() -> {
@@ -563,6 +561,10 @@ public class AlekwvFisherPlugin extends Plugin {
                 if (isMouseOutsideScreen()) {
                     Thread.sleep(getRandomNumber(0, 7000));
                     Antiban("1,2,3");
+                }
+
+                if (antiban) {
+                    Antiban("1");
                 }
 
                 Thread.sleep(sleepBefore);

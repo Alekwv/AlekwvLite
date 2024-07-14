@@ -1,5 +1,4 @@
 package net.runelite.client.plugins.AlekwvFisher;
-
 import net.runelite.api.Client;
 import net.runelite.api.Point;
 import net.runelite.client.ui.overlay.Overlay;
